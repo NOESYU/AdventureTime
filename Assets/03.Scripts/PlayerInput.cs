@@ -12,11 +12,10 @@ public class PlayerInput : MonoBehaviour
 
     public bool isMove;
     public bool isAttack;
-    public Coroutine attackRoutine;
 
     public Rigidbody2D playerRb;
     public Animator playerAnim;
-
+    public GameObject attackEffe;
     public VirtualJoyStick virtualJoyStick;
     
     public enum LayerName
@@ -28,6 +27,7 @@ public class PlayerInput : MonoBehaviour
     // 필요한 값들 초기화
     private void Start()
     {
+        attackEffe = transform.GetChild(1).gameObject;
         playerRb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
     }
@@ -40,7 +40,8 @@ public class PlayerInput : MonoBehaviour
         yMove = virtualJoyStick.Vertical;
         
         // 실제 움직임 구현
-        transform.Translate(xMove * speed * Time.deltaTime, yMove * speed * Time.deltaTime, 0);
+        //transform.Translate(xMove * speed * Time.deltaTime, yMove * speed * Time.deltaTime, 0);
+        playerRb.velocity = new Vector2(xMove, yMove) * speed;
     }
 
     // 플레이어 이동방향에 따른 애니메이션 구현을 위한 상태 정보, Update 메서드에서 호출
@@ -69,6 +70,8 @@ public class PlayerInput : MonoBehaviour
     // 공격 모션 멈추기 위한 메서드
     public void StopAttack() {
         playerAnim.SetBool("isAttack", false);
+        attackEffe.SetActive(false);
+        
     }
 
     public void ActivateLayer(LayerName layerName)

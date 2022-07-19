@@ -7,6 +7,8 @@ TagManager:
   - Npc
   - Portal
   - Monster
+  - AttackEffe
+  - Item
   layers:
   - Default
   - TransparentFX
