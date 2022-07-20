@@ -40,7 +40,6 @@ public class PlayerInput : MonoBehaviour
         yMove = virtualJoyStick.Vertical;
         
         // 실제 움직임 구현
-        //transform.Translate(xMove * speed * Time.deltaTime, yMove * speed * Time.deltaTime, 0);
         playerRb.velocity = new Vector2(xMove, yMove) * speed;
     }
 
